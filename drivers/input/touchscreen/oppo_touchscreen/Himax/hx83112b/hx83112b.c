@@ -41,18 +41,17 @@ static struct chip_data_hx83112b *g_chip_info = NULL;
 #define OPPO17001TRULY_TD4322_1080P_CMD_PANEL 29
 
 /*******Part0:LOG TAG Declear********************/
-#define TPD_DEVICE "himax83112b"
-#define TPD_INFO(a, arg...)  pr_err("[TP]"TPD_DEVICE ": " a, ##arg)
+#define TPD_DEVICE_HIMAX "himax83112b"
 #define TPD_DEBUG(a, arg...)\
     do{\
         if (LEVEL_DEBUG == tp_debug)\
-            pr_err("[TP]"TPD_DEVICE ": " a, ##arg);\
+            pr_err("[TP]"TPD_DEVICE_HIMAX ": " a, ##arg);\
     }while(0)
 
 #define TPD_DETAIL(a, arg...)\
     do{\
         if (LEVEL_BASIC != tp_debug)\
-            pr_err("[TP]"TPD_DEVICE ": " a, ##arg);\
+            pr_err("[TP]"TPD_DEVICE_HIMAX ": " a, ##arg);\
     }while(0)
 
 #define TPD_DEBUG_NTAG(a, arg...)\
@@ -3850,7 +3849,7 @@ static int hx83112b_get_gesture_info(void *chip_data, struct gesture_info * gest
     /*for (i = 0; i < 56; i++)
     {
         if(i%8 == 0 && i != 56) {
-            printk(TPD_DEVICE);
+            printk(TPD_DEVICE_HIMAX);
             printk(" %s:", __func__);
         }
         printk("0x%x ",  buf[i]);
@@ -4398,12 +4397,12 @@ static int hx83112b_i2c_resume(struct device *dev)
 }
 
 static const struct i2c_device_id tp_id[] = {
-    { TPD_DEVICE, 0 },
+    { TPD_DEVICE_HIMAX, 0 },
     { }
 };
 
 static struct of_device_id tp_match_table[] = {
-    { .compatible = TPD_DEVICE,},
+    { .compatible = TPD_DEVICE_HIMAX,},
     { .compatible = "hx83112b-s4322",},
     { }
 };
@@ -4420,7 +4419,7 @@ static struct i2c_driver tp_i2c_driver = {
     .remove     = hx83112b_tp_remove,
     .id_table   = tp_id,
     .driver     = {
-        .name   = TPD_DEVICE,
+        .name   = TPD_DEVICE_HIMAX,
         .of_match_table =  tp_match_table,
         .pm = &tp_pm_ops,
     },
@@ -4430,7 +4429,7 @@ static int __init tp_driver_init(void)
 {
     TPD_INFO("%s is called\n", __func__);
 
-    if (!tp_judge_ic_match(TPD_DEVICE))
+    if (!tp_judge_ic_match(TPD_DEVICE_HIMAX))
         return -1;
 
     if (i2c_add_driver(&tp_i2c_driver)!= 0) {
