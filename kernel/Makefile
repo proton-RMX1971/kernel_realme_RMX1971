@@ -120,8 +120,7 @@ $(obj)/configs.o: $(obj)/config_data.h
 targets += config_data.gz
 ifeq ($(CONFIG_MACH_REALME_RMX1921),y)
 $(obj)/config_data.gz: arch/arm64/configs/RMX1921-stock_defconfig FORCE
-endif
-ifeq ($(CONFIG_MACH_REALME_RMX1971),y)
+else ifeq ($(CONFIG_MACH_REALME_RMX1971),y)
 $(obj)/config_data.gz: arch/arm64/configs/RMX1971-stock_defconfig FORCE
 endif
 	$(call if_changed,gzip)
