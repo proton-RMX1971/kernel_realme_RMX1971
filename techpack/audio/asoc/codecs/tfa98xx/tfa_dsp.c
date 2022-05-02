@@ -2917,10 +2917,10 @@ enum Tfa98xx_Error tfaRunStartup(Tfa98xx_handle_t handle, int profile)
         if (tfa98xx_runtime_verbose) 
             pr_debug("Timed out\n");
         return Tfa98xx_Error_StateTimedOut;
-    }  else
+    }  else {
         if (tfa98xx_runtime_verbose) 
             pr_debug(" OK (tries=%d)\n", tries);
-
+    }
 	#ifdef CONFIG_PRODUCT_REALME_SDM710
 	status = TFA_GET_BF(handle, CLKS);
 	status1 = TFA_GET_BF(handle, PLLS);
